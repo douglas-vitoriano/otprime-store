@@ -1,0 +1,8 @@
+{
+  "name": "otprime-store",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:DMVitoriano/otprime-store.git",
+  "author": "Douglas Marins <dmv@tokenizadora.com.br>",
+  "license": "MIT"
+}
