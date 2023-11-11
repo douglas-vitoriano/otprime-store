@@ -120,6 +120,12 @@ GEM
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    devise (4.9.3)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0)
+      responders
+      warden (~> 1.2.3)
     diff-lcs (1.5.0)
     docile (1.4.0)
     doorkeeper (5.6.6)
@@ -162,6 +168,8 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jsbundling-rails (1.2.1)
+      railties (>= 6.0.0)
     jsonapi-serializer (2.2.0)
       activesupport (>= 4.2)
     kaminari (1.2.2)
@@ -213,6 +221,7 @@ GEM
     nio4r (2.5.9)
     nokogiri (1.15.4-x86_64-linux)
       racc (~> 1.4)
+    orm_adapter (0.5.0)
     paranoia (2.6.3)
       activerecord (>= 5.1, < 7.2)
     pg (1.5.4)
@@ -272,6 +281,9 @@ GEM
       io-console (~> 0.5)
     request_store (1.5.1)
       rack (>= 1.4)
+    responders (3.1.1)
+      actionpack (>= 5.2)
+      railties (>= 5.2)
     rexml (3.2.6)
     rspec-core (3.12.2)
       rspec-support (~> 3.12.0)
@@ -389,6 +401,8 @@ GEM
     validates_zipcode (0.5.2)
       activemodel (>= 4.2.0)
     vcr (6.2.0)
+    warden (1.2.9)
+      rack (>= 2.0.9)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -416,11 +430,13 @@ DEPENDENCIES
   capybara
   database_cleaner
   debug
+  devise
   dotenv-rails
   factory_bot_rails
   faker
   importmap-rails
   jbuilder
+  jsbundling-rails
   pg
   pry-rails
   puma (~> 5.0)
