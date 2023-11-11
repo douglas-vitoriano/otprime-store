@@ -13,8 +13,6 @@ gem "pg"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
-gem "spree", "~> 4.0"
-
 gem "bootstrap"
 
 gem "sassc-rails", "2.1.2"
