@@ -2,8 +2,8 @@
 
 <% if user_signed_in? %>
     <h1>Esse é o Otprime</h1>
-    <% link_to "logout", destroy_user_session_path, method: :delete %>
+    <%= link_to "logout", destroy_user_session_path, method: :delete %>
 <% else %>
-    <h2>Você não esta logado. Por favor se cadastre. <% link_to "Sign Up", new_user_registration_path %></h2>
-    <% link_to "Login", new_user_session_path, :class => "navbar-link" %>
+    <h2>Você não está logado. Por favor, cadastre-se. <%= link_to "Sign Up", new_user_registration_path %></h2>
+    <%= link_to "Login", new_user_session_path, :class => "navbar-link" %>
 <% end %> 
