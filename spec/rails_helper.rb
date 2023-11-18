@@ -2,6 +2,7 @@ require "spec_helper"
 require "vcr"
 require "simplecov"
 require "faker"
+require "shoulda/matchers"
 
 ENV["RAILS_ENV"] ||= "test"
 
@@ -29,7 +30,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
 end
 
-shoulda::Matchers.configure do |config|
+Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
     with.library :rails

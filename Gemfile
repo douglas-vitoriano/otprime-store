@@ -73,6 +73,8 @@ group :development, :test do
   gem "faker"
   gem "pry-rails"
   gem "rspec-rails"
+  gem "shoulda-matchers"
+  gem "webmock"
 end
 
 group :development do
@@ -92,7 +94,6 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
   gem "database_cleaner"
-  gem "shoulda-matchers"
   gem "simplecov"
   gem "vcr"
 end

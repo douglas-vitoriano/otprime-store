@@ -8,8 +8,8 @@
 /.bundle
 
 # Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-*
+# /db/*.sqlite3
+# /db/*.sqlite3-*
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -44,3 +44,9 @@ coverage
 !/app/assets/builds/.keep
 
 /node_modules
+.package-lock.json
+.sass.config.js
+.procfile.dev
+/webpack.config.js
+/yarn.lock
+/yarn-error.log
