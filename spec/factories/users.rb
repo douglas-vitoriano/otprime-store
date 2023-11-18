@@ -8,6 +8,6 @@ FactoryBot.define do
     password { Faker::Alphanumeric.alpha(number: 10) }
     password_confirmation { password }
     name { name }
-    phone { Faker::PhoneNumber.cell_phone }
+    phone_number { Faker::PhoneNumber.cell_phone }
   end
 end

@@ -21,7 +21,7 @@ RSpec.describe User, type: :model do
     end
 
     it "valida campo telefone não esta presente" do
-      user = build(:user, phone: nil)
+      user = build(:user, phone_number: nil)
       expect(user.valid?).to eq(false)
     end
   end
