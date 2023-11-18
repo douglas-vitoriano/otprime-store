@@ -5,4 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :name, :phone_number, presence: true
+
+  enum role: { user: "user", admin: "admin" }
+  #enum role: [:user, :admin], tbm pode ser utilizado array
 end
