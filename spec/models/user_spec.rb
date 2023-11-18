@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-  context "Espero validar os campos obrigatórios, " do
+  context "Espero validar os campos obrigatórios," do
     it "valida o campo nome" do
       user = build(:user)
       expect(user.valid?).to eq(true)
@@ -10,7 +10,7 @@ RSpec.describe User, type: :model do
       #para forma negativa: expect(user.valid?).to eq(false) ou expect(user).to be_falsey
     end
 
-    it "valida campo nome não esta presente" do
+    it "valida campo nome não está presente" do
       user = build(:user, name: nil)
       expect(user.valid?).to eq(false)
     end
@@ -20,7 +20,7 @@ RSpec.describe User, type: :model do
       expect(user.valid?).to eq(true)
     end
 
-    it "valida campo telefone não esta presente" do
+    it "valida campo telefone não está presente" do
       user = build(:user, phone_number: nil)
       expect(user.valid?).to eq(false)
     end
