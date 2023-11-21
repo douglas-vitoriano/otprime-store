@@ -1,7 +1,5 @@
-// This file is responsible for starting the Stimulus app after controllers have been eager-loaded
-
-import { application } from './application'
+import './application'
 
 export function startStimulusApp() {
-  application.start()
+  Turbo.start()
 }
