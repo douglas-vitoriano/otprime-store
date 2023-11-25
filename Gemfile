@@ -98,3 +98,5 @@ group :test do
   gem "simplecov"
   gem "vcr"
 end
+
+gem "trestle", "~> 0.9.8"
