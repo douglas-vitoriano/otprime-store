@@ -119,6 +119,7 @@
 
 "@hotwired/turbo-rails@^7.2.0":
   version "7.3.0"
+
   resolved "https://registry.npmjs.org/@hotwired/turbo-rails/-/turbo-rails-7.3.0.tgz"
   integrity sha512-fvhO64vp/a2UVQ3jue9WTc2JisMv9XilIC7ViZmXAREVwiQ2S4UC7Go8f9A1j4Xu7DBI6SbFdqILk5ImqVoqyA==
   dependencies:
@@ -150,6 +151,7 @@ anymatch@~3.1.2:
 
 binary-extensions@^2.0.0:
   version "2.2.0"
+
   resolved "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.2.0.tgz"
   integrity sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==
 
@@ -219,7 +221,7 @@ fill-range@^7.0.1:
   integrity sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==
   dependencies:
     to-regex-range "^5.0.1"
-
+    
 fsevents@~2.3.2:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-2.3.3.tgz#cac6407785d03675a2a5e1a5305c697b347d90d6"
@@ -234,6 +236,7 @@ glob-parent@~5.1.2:
 
 immutable@^4.0.0:
   version "4.3.4"
+
   resolved "https://registry.npmjs.org/immutable/-/immutable-4.3.4.tgz"
   integrity sha512-fsXeu4J4i6WNWSikpI88v/PcVflZz+6kMhUfIwc5SY+poQRPnaf5V7qds6SUyUN3cVxEzuCab7QIoLOQ+DQ1wA==
 
@@ -251,6 +254,7 @@ is-extglob@^2.1.1:
 
 is-glob@^4.0.1, is-glob@~4.0.1:
   version "4.0.3"
+
   resolved "https://registry.npmjs.org/is-glob/-/is-glob-4.0.3.tgz"
   integrity sha512-xelSayHH36ZgE7ZWhli7pW34hNbNl8Ojv5KVmkJD4hBdD3th8Tfk9vYasLM+mXWOZhFkgZfxhLSnrwRr4elSSg==
   dependencies:

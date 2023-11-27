@@ -14,7 +14,9 @@ gem "pg"
 gem "sprockets-rails"
 
 gem "bootstrap"
+
 gem "bootstrap-icons-helper"
+
 
 gem "sassc-rails", "2.1.2"
 
