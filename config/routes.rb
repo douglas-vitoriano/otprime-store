@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
-  resources :admin_users
   devise_for :users
+
   root to: "home#index"
+
+  namespace :admin do
+    root to: "home#index"
+    resources :categories
+    resources :user_admins
+  end
 end
 
 =begin
