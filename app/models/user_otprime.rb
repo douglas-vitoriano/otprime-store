@@ -1,0 +1,2 @@
+class UserOtprime < ApplicationRecord
+end
