@@ -10,63 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_30_220429) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_30_231633) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "admins", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "name", default: "", null: false
-    t.string "email", default: "", null: false
-    t.string "phone_number", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
+  create_table "addresses", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "street", null: false
+    t.string "neighborhood", null: false
+    t.string "number", null: false
+    t.string "zipcode", null: false
+    t.string "city", null: false
+    t.string "state", null: false
+    t.boolean "main", default: false, null: false
+    t.decimal "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_admins_on_email", unique: true
-    t.index ["user_id"], name: "index_admins_on_user_id"
+    t.index ["id"], name: "index_addresses_on_id", unique: true
+    t.index ["user_id"], name: "addresses_user"
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string "name"
-    t.integer "position"
+    t.string "name", null: false
+    t.integer "position", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "my_accounts", force: :cascade do |t|
-    t.string "name"
-    t.string "email"
-    t.string "password"
-    t.string "phone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_categories_on_id", unique: true
+    t.index ["name"], name: "categories_name"
   end
 
   create_table "products", force: :cascade do |t|
-    t.string "item"
-    t.string "price"
+    t.string "name", null: false
+    t.text "description", null: false
+    t.decimal "price", null: false
+    t.decimal "category_id", null: false
+    t.boolean "publish", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "requests", force: :cascade do |t|
-    t.string "number_request"
-    t.date "date"
-    t.string "status"
-    t.bigint "user_list_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_list_id"], name: "index_requests_on_user_list_id"
-  end
-
-  create_table "user_admins", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "name"
-    t.string "email"
-    t.string "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_user_admins_on_user_id"
+    t.index ["category_id"], name: "products_category"
+    t.index ["id"], name: "index_products_on_id", unique: true
   end
 
   create_table "user_lists", force: :cascade do |t|
@@ -74,16 +56,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_30_220429) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_user_lists_on_user_id"
-  end
-
-  create_table "user_otprimes", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "name"
-    t.string "phone_number"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_user_otprimes_on_email", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -99,8 +71,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_30_220429) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
-  add_foreign_key "admins", "users"
-  add_foreign_key "user_admins", "users"
-  add_foreign_key "user_lists", "users"
 end

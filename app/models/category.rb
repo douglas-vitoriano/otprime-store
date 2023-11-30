@@ -1,3 +1,5 @@
 class Category < ApplicationRecord
-  has_many :product_painels
+  validates :name, :position, presence: true
+
+  validates :name, uniqueness: true
 end
