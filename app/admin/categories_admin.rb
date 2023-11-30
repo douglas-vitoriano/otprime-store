@@ -7,7 +7,6 @@ Trestle.resource(:categories) do
 
   # Customize the table columns shown on the index view.
   table do
-    column :id
     column :name
     column :position
     actions
@@ -18,9 +17,6 @@ Trestle.resource(:categories) do
     row do
       col (6) { text_field :name }
       col (6) { text_field :position }
-    end
-    row do
-      col { date_field :created_at }
     end
   end
 
@@ -56,19 +52,26 @@ Trestle.resource(:categories) do
       end
     end
 
-    def destroy
-      @category.destroy
+    # def destroy
+    #   @category.destroy
 
-      respond_to do |format|
-        format.html { redirect_to categories_admin_path, notice: "Categoria excluída com sucesso." }
-        format.json { head :no_content }
-      end
-    end
+    #   respond_to do |format|
+    #     format.html { redirect_to categories_admin_path, notice: "Categoria excluída com sucesso." }
+    #     format.json { head :no_content }
+    #   end
+    # end
 
     private
 
     def set_category
-      @category = Category.find(params[:id])
+      @category = Category.where(params[:id])
+
+      unless @category
+        respond_to do |format|
+          format.html { redirect_to categories_admin_path, alert: "Categoria não encontrada." }
+          format.json { head :not_found }
+        end
+      end
     end
 
     def category_params

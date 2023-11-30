@@ -1,21 +1,23 @@
-Trestle.resource(:user_lists) do
+Trestle.resource(:user_otprimes) do
   menu do
     item :user_lists, icon: "fa fa-users",
                       :label => "Listagem de Usuários",
                       :priority => 1
   end
   remove_action :new
+
   # Customize the table columns shown on the index view.
   #
-  # table do
-  #   column :name
-  #   column :created_at, align: :center
-  #   actions
-  # end
+  table do
+    column :name
+    column :email
+    column :phone
+    actions
+  end
 
   # Customize the form fields shown on the new/edit views.
   #
-  # form do |user_list|
+  # form do |user_otprime|
   #   text_field :name
   #
   #   row do
@@ -32,6 +34,6 @@ Trestle.resource(:user_lists) do
   #   http://guides.rubyonrails.org/action_controller_overview.html#strong-parameters
   #
   # params do |params|
-  #   params.require(:user_list).permit(:name, ...)
+  #   params.require(:user_otprime).permit(:name, ...)
   # end
 end
