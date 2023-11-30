@@ -7,11 +7,10 @@ Trestle.resource(:user_admins) do
 
   # Customize the table columns shown on the index view.
   #
-  table do
+  table do UserAdmin.all
     column :name
     column :email
-    actions
-  end
+    actions   end
 
   # Customize the form fields shown on the new/edit views.
   #

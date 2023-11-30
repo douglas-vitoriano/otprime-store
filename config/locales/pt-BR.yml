@@ -4,4 +4,9 @@ pt-BR:
   delimiter:
     products: "Produtos"
     categories: "Categorias"
-      
+
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+      short: "%d de %B"
+      long: "%d de %B de %Y"

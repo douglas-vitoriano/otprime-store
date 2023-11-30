@@ -4,7 +4,7 @@ Trestle.resource(:requests) do
                     :label => "Todos os Pedidos",
                     :priority => 0
   end
-
+  remove_action :new
   # Customize the table columns shown on the index view.
   #
   # table do

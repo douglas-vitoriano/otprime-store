@@ -1,4 +1,4 @@
-Trestle.resource(:product_painels) do
+Trestle.resource(:products) do
   menu do
     item :product_painels, icon: "fa fa-barcode",
                            :label => "Painel de Produtos",

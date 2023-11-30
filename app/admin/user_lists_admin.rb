@@ -4,7 +4,7 @@ Trestle.resource(:user_lists) do
                       :label => "Listagem de Usuários",
                       :priority => 1
   end
-
+  remove_action :new
   # Customize the table columns shown on the index view.
   #
   # table do
