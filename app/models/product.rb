@@ -1,5 +1,9 @@
 class Product < ApplicationRecord
-  validates :name, :description, :price, :category_id, :publish, presence: true
-
+  has_one_attached :image do |attachable|
+    attachable.variant :thumb, resize_to_limit: [100, 100]
+    attachable.variant :big_thumb, resize_to_limit: [600, 700]
+  end
   belongs_to :category
+
+  validates :name, :description, :price, presence: true
 end

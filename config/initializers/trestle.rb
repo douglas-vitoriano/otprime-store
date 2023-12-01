@@ -22,7 +22,7 @@ Trestle.configure do |config|
   # Set the text shown in the page footer within the admin.
   # Defaults to 'Powered by Trestle'.
   #
-  config.footer = "Powered by Otprime Store"
+  config.footer = "Powered by Otprime Store - 2023"
 
   # Sets the default precision for timestamps (either :minutes or :seconds).
   # Defaults to :minutes.

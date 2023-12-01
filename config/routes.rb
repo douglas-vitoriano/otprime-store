@@ -2,10 +2,20 @@ Rails.application.routes.draw do
   devise_for :users
 
   root to: "home#index"
+  resources :settings, only: [:index] do
+    collection do
+      get :password
+      patch :update_user
+      patch :update_password
+    end
+  end
+
+  resources :addresses
 
   namespace :admin do
     root to: "home#index"
-    resources :admins
+    resources :categories
+    resources :products
   end
 end
 

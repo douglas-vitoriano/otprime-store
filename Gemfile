@@ -22,6 +22,8 @@ gem "sassc-rails", "2.1.2"
 
 gem "sass-rails", "~> 6.0"
 
+gem "image_processing", ">= 1.2"
+
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3', '~> 1.4'
 

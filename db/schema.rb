@@ -14,7 +14,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_30_231633) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "addresses", force: :cascade do |t|
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "role_user", ["user", "admin"]
+
+  create_table "addresses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "street", null: false
     t.string "neighborhood", null: false
@@ -30,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_30_231633) do
     t.index ["user_id"], name: "addresses_user"
   end
 
-  create_table "categories", force: :cascade do |t|
+  create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.integer "position", default: 0, null: false
     t.datetime "created_at", null: false
@@ -39,36 +43,33 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_30_231633) do
     t.index ["name"], name: "categories_name"
   end
 
-  create_table "products", force: :cascade do |t|
+  create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
-    t.text "description", null: false
-    t.decimal "price", null: false
-    t.decimal "category_id", null: false
+    t.text "description", default: "", null: false
+    t.decimal "price", precision: 8, scale: 2, null: false
+    t.uuid "category_id", null: false
     t.boolean "publish", default: false, null: false
+    t.boolean "promo", default: false
+    t.decimal "promo_price", precision: 8, scale: 2, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "products_category"
+    t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["id"], name: "index_products_on_id", unique: true
   end
 
-  create_table "user_lists", force: :cascade do |t|
-    t.bigint "user_id"
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "phone", null: false
+    t.string "encrypted_password"
+    t.string "reset_password_token"
+    t.string "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.enum "role", default: "user", null: false, enum_type: "role_user"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_user_lists_on_user_id"
+    t.index ["id", "email"], name: "index_users_on_id_and_email", unique: true
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.string "name"
-    t.string "phone_number"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
+  add_foreign_key "products", "categories"
 end

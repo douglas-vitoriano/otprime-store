@@ -1,8 +1,12 @@
 class User < ApplicationRecord
-  enum role: { admin: 0, customer: 1 }
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
 
-  validates :name, :email, :role, :phone, :encrypted_password, :reset_password_token,
-            :reset_password_sent_at, :remember_created_at, presence: true
+  validates :name, :phone, presence: true
 
-  validates :id, uniqueness: { scope: :email }
+  has_one_attached :avatar
+
+  has_many :addresses
+
+  enum role: { user: "user", admin: "admin" }
 end
