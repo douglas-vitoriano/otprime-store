@@ -3,9 +3,9 @@ class SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
     if resource.is_a?(Admin)
-      admin_dashboard_path
+      redirect_to admin_root_path
     else
-      root_path
+      redirect_to root_path
     end
   end
 end

@@ -104,3 +104,5 @@ group :test do
 end
 
 gem "trestle", "~> 0.9.8"
+
+gem "pundit", "~> 2.3"

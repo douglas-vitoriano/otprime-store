@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :addresses
 
   namespace :admin do
-    root to: "home#index"
+    root to: "dashboard#index"
     resources :categories
     resources :products
   end

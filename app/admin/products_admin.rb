@@ -1,8 +1,8 @@
 Trestle.resource(:products) do
   menu do
-    item :product_painels, icon: "fa fa-barcode",
-                           :label => "Painel de Produtos",
-                           :group => "Produtos"
+    item :products, icon: "fa fa-barcode",
+                    :label => "Painel de Produtos",
+                    :group => "Produtos"
   end
 
   table do
@@ -29,55 +29,16 @@ Trestle.resource(:products) do
     end
   end
 
-  # controller do
-  #   before_action :set_product, only: [:show, :update, :destroy]
+  controller do
+    include Pundit
 
-  #   def show
-  #   end
-
-  #   def create
-  #     @product = Product.new(product_params)
-
-  #     respond_to do |format|
-  #       if @product.save
-  #         format.html { redirect_to products_admin_path(@product), notice: "Produto criado com sucesso." }
-  #         format.json { render :show, status: :created, location: @product }
-  #       else
-  #         format.html { render :new, status: :unprocessable_entity }
-  #         format.json { render json: @product.errors, status: :unprocessable_entity }
-  #       end
-  #     end
-  #   end
-
-  #   def update
-  #     respond_to do |format|
-  #       if @product.update(product_params)
-  #         format.html { redirect_to products_admin_path(@product), notice: "Produto atualizado com sucesso." }
-  #         format.json { render :show, status: :ok, location: @product }
-  #       else
-  #         format.html { render :edit, status: :unprocessable_entity }
-  #         format.json { render json: @product.errors, status: :unprocessable_entity }
-  #       end
-  #     end
-  #   end
-
-  #   private
-
-  #   def set_product
-  #     @product = Product.find(params[:id])
-
-  #     unless @product
-  #       respond_to do |format|
-  #         format.html { redirect_to products_admin_path, alert: "Produto não encontrado." }
-  #         format.json { head :not_found }
-  #       end
-  #     end
-  #   end
-
-  #   def product_params
-  #     params.require(:product).permit(:name, :description, :publish, :price, :category_id)
-  #   end
-  # end
+    def new
+      @product = authorize Product.new
+    rescue Pundit::NotAuthorizedError
+      flash[:error] = "Você não tem permissão para criar um novo produto sem uma categoria"
+      redirect_to new_categories_admin_path
+    end
+  end
 
   # By default, all parameters passed to the update and create actions will be
   # permitted. If you do not have full trust in your users, you should explicitly
