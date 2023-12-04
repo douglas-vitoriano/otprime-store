@@ -43,16 +43,21 @@ Trestle.resource(:products) do
 
   controller do
     include Pundit::Authorization
-
+    before_action :authenticate_user!
     before_action do
       ActiveStorage::Current.url_options = Rails.application.config.action_mailer.default_url_options
     end
-    before_action :authenticate_user!
+
+    def index
+      @products = Product.published
+    end
 
     def show
+      @products = Product.where(publish: true)
+
       begin
         @product = Product.find(params[:id])
-        authorize @product
+        # authorize @product
       rescue ActiveRecord::RecordNotFound
         flash[:error] = "Produto não encontrado."
       end
@@ -78,24 +83,20 @@ Trestle.resource(:products) do
     #   end
     # end
 
-    def new
-      @product = authorize Product.new
-    rescue Pundit::NotAuthorizedError
-      flash[:error] = "Você não tem permissão para criar um novo produto sem uma categoria"
-    end
-
+    # def new
+    #   @product = authorize Product.new
+    # rescue Pundit::NotAuthorizedError
+    #   flash[:error] = "Você não tem permissão para criar um novo produto sem uma categoria"
+    #   redirect_to new_categories_admin_path
+    # end
     def destroy
       @product = Product.find(params[:id])
-      authorize @product
-
+      # authorize @product
       if @product.image.attached?
         @product.image.purge
       end
-
       @product.destroy
-
       flash[:message] = "Produto excluído com sucesso."
-
       render :new
     end
 

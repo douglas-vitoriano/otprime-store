@@ -1,4 +1,5 @@
 class Product < ApplicationRecord
+  scope :published, -> { where(publish: true) }
   has_one_attached :image do |attachable|
     attachable.variant :thumb, resize_to_limit: [100, 100]
     attachable.variant :big_thumb, resize_to_limit: [600, 700]
@@ -23,7 +24,7 @@ class Product < ApplicationRecord
     folder = "products"
     name = "file"
     record_type = "Product"
-    record_id = self.blob_id
+    record_id = self.image.blob.id
     ImageService.save(instance, folder, name, record_type, record_id)
   end
 
