@@ -13,7 +13,7 @@
       <% @products.each do |product| %>
         <div class="card m-3">
           <% if product.image.present? && product.image.attached? %>  
-            <%= image_tag product.image.variant(:thumb).processed, class: "card-img-top", style: "width:268px; height:200px " %>
+            <%= image_tag product.image.variant(:thumb).processed, class: "card-img-top", style: "width:auto; height:200px " %>
           <% else %>
             <%= image_tag "default_image.jpg", class: "card-img-top", alt: "No Image Available" %>
           <% end %>
