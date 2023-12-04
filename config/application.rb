@@ -16,6 +16,7 @@ module OtprimeStore
     config.load_defaults 7.0
     config.i18n.default_locale = "pt-BR"
     Faker::Config.locale = "pt-BR"
+    config.action_controller.default_url_options = { host: "localhost", port: 3000 }
 
     # Configuration for the application, engines, and railties goes here.
     #

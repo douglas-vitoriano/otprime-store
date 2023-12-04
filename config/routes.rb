@@ -16,6 +16,11 @@ Rails.application.routes.draw do
     root to: "dashboard#index"
     resources :categories
     resources :products
+    resources :users do
+      member do
+        post :toggle_admin
+      end
+    end
   end
 end
 
