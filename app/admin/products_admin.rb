@@ -10,6 +10,7 @@ Trestle.resource(:products) do
     column :price
     column :publish, ->(product) { product.publish ? "Sim" : "Não" }
     column :category_name, ->(product) { product.category.name }
+    column :promo, ->(product) { product.promo ? "Sim" : "Não" }
     column :image do |product|
       if product.image.attached?
         image_tag product.image.variant(resize_to_limit: [100, 100]).processed.url
