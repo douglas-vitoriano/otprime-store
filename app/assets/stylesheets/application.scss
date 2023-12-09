@@ -1,3 +1,7 @@
-@import 'bootstrap/bootstrap';
-@import 'bootstrap-icons/font/bootstrap-icons';
+@import 'bootstrap';
+@import 'bootstrap-icons';
 
+//= require mask
+//= require_tree .
+
+// @import 'bootstrap-icons/scss/bootstrap-icons';

@@ -1,6 +1,6 @@
 <div class="alert alert-info text-center">
   <% flash.each do |type, msg| %>
-    <div>
+    <div class="alert <%= flash_class(type) %> text-center">
       <%= msg %>
     </div>
   <% end %>
