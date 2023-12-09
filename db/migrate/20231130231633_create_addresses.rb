@@ -5,10 +5,10 @@ class CreateAddresses < ActiveRecord::Migration[7.0]
       t.string :street, null: false
       t.string :neighborhood, null: false
       t.string :number, null: false
+      t.string :address_detail
       t.string :zipcode, null: false
       t.string :city, null: false
       t.string :state, null: false
-      t.boolean :main, null: false, default: false
       t.numeric :user_id, null: false
 
       t.timestamps
