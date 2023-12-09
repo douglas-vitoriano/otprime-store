@@ -7,24 +7,36 @@
 // @import 'bootstrap-icons/scss/bootstrap-icons';
 
 .input_image_full {
-    width: 100%;
+  width: 100%;
+}
+
+.menu-item-profile {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.menu-item-profile:hover {
+  background-color: #e0e0e0;
 }
 
 .list-group-item {
-    transition: background-color 0.3s ease;
-  }
-  
+  transition: background-color 0.3s ease;
+  border: none; 
+}
+
 .list-group-item:hover {
-background-color: #e0e0e0;
+  background-color: #e0e0e0;
 }
 
 .list-group-item a {
-text-decoration: none;
-font-weight: 600;
-color: black;
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
 }
 
 .list-group-item a:hover {
-background-color: #e0e0e0;
-transition: background-color 0.3s ease;
+  background-color: #e0e0e0;
+  transition: background-color 0.3s ease;
 }
