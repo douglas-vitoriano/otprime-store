@@ -14,16 +14,16 @@
           <div class="card-header">
             Meu Perfil
           </div>
-          <ul class="list-group list-group-flush">
-              <li class="list-group-item" onmouseover="this.style.backgroundColor='#e0e0e0';" onmouseout="this.style.backgroundColor='transparent';">
-                  <a style="text-decoration: none; font-weight: 600; color: black; transition: background-color 0.3s ease;" href="#" onmouseover="this.style.backgroundColor='#e0e0e0';" onmouseout="this.style.backgroundColor='transparent';">Alterar Senha</a>
-              </li>
-              <li class="list-group-item" onmouseover="this.style.backgroundColor='#e0e0e0';" onmouseout="this.style.backgroundColor='transparent';">
-                  <a style="text-decoration: none; font-weight: 600; color: black; transition: background-color 0.3s ease;" href="#" onmouseover="this.style.backgroundColor='#e0e0e0';" onmouseout="this.style.backgroundColor='transparent';">Endereços</a>
-              </li>
-              <li class="list-group-item" onmouseover="this.style.backgroundColor='#e0e0e0';" onmouseout="this.style.backgroundColor='transparent';">
-                  <a style="text-decoration: none; font-weight: 600; color: black; transition: background-color 0.3s ease;" href="#" onmouseover="this.style.backgroundColor='#e0e0e0';" onmouseout="this.style.backgroundColor='transparent';">Produtos Favoritos</a>
-              </li>
+         <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <a class="list-link" href="#">Alterar Senha</a>
+            </li>
+            <li class="list-group-item">
+              <a class="list-link" href="#">Endereços</a>
+            </li>
+            <li class="list-group-item">
+              <a class="list-link" href="#">Produtos Favoritos</a>
+            </li>
           </ul>
         </div>
       </div> 
@@ -32,8 +32,9 @@
           <div class="card-body">    
               <%= render "layouts/shared/flash" if flash.present? %>  
             <h2> <%= current_user.name %></h2>            
-            <%= image_tag "profile", width: 120, class: "mb-5" %>            
+            <%= image_tag avatar_url(current_user), width: 120, height: 120, class: "mb-4 rounded-circle" %>
             <%= simple_form_for current_user, url: update_user_settings_path do |f| %>
+              <%= f.input :avatar, label: false, hint: "Escolha uma imagem para seu perfil", input_html: { class: "input_image_full" } %>
               <%= f.input :name, label: "Nome" %>
               <%= f.input :email, label: "E-mail", readonly: true %>              
               <%= f.input :phone, label: "Telefone", input_html: { class: "mask-phone" }, placeholder: "Telefone" %>                
