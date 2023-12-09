@@ -1,27 +1,48 @@
-<section class="py-5">
-  <div class="container">
+<header class="bg-dark py-1">
+  <div class="container px-5 px-lg-5 my-5">
+    <div class="text-center text-white">
+      <h1 class="display-8 fw-bolder">Sua loja virtual preferida</h1>
+      <p class="lead fw-normal text-white-50 mb-0">Otprime, mexendo com sua cabeça</p>
+    </div>
+  </div>
+</header>
+<section class = "py-5">
+  <div class = "container ">
     <div class="row">
       <div class="col-3">
         <div class="card">
-          <%= render "menu" %>
+          <div class="card-header">
+            Meu Perfil
+          </div>
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item" onmouseover="this.style.backgroundColor='#e0e0e0';" onmouseout="this.style.backgroundColor='transparent';">
+                  <a style="text-decoration: none; font-weight: 600; color: black; transition: background-color 0.3s ease;" href="#" onmouseover="this.style.backgroundColor='#e0e0e0';" onmouseout="this.style.backgroundColor='transparent';">Alterar Senha</a>
+              </li>
+              <li class="list-group-item" onmouseover="this.style.backgroundColor='#e0e0e0';" onmouseout="this.style.backgroundColor='transparent';">
+                  <a style="text-decoration: none; font-weight: 600; color: black; transition: background-color 0.3s ease;" href="#" onmouseover="this.style.backgroundColor='#e0e0e0';" onmouseout="this.style.backgroundColor='transparent';">Endereços</a>
+              </li>
+              <li class="list-group-item" onmouseover="this.style.backgroundColor='#e0e0e0';" onmouseout="this.style.backgroundColor='transparent';">
+                  <a style="text-decoration: none; font-weight: 600; color: black; transition: background-color 0.3s ease;" href="#" onmouseover="this.style.backgroundColor='#e0e0e0';" onmouseout="this.style.backgroundColor='transparent';">Produtos Favoritos</a>
+              </li>
+          </ul>
         </div>
-      </div>
+      </div> 
       <div class="col-9">
-        <div class="card">
-          <div class="card-body">
-            <%= render "layouts/shared/flash" if flash.present? %>
-            <h2><%= current_user.name %></h2>
-            <%= image_tag user_avatar_url(current_user), width: 120, height: 120, class: "mb-4 rounded-circle" %>
-            <%= simple_form_for current_user, url: update_user_settings_path, data: { turbo: false } do |f| %>
-              <%= f.input :avatar, label: false, hint: "Escolha uma foto para sua conta.", input_html: { class: "input_image_full" } %>
-              <%= f.input :email, readonly: true %>
-              <%= f.input :name %>
-              <%= f.input :phone, input_html: { class: "mask-phone" } %>
+        <div class="card">    
+          <div class="card-body">      
+            <h2> <%= current_user.name %></h2>            
+            <%= image_tag "profile", width: 120, class: "mb-5" %>            
+            <%= simple_form_for current_user, url: "#" do |f| %>
+              <%= f.input :name, label: "Nome" %>
+              <%= f.input :email, label: "E-mail", readonly: true %>              
+              <%= f.input :phone, label: "Telefone" %>                
               <%= f.button :submit, "Atualizar", class: "btn btn-primary mt-4" %>
             <% end %>
           </div>
+          
         </div>
-      </div>
+      </div>    
     </div>
-  </div>
+  </div>    
 </section>
+
