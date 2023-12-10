@@ -8,4 +8,5 @@ class User < ApplicationRecord
 
   enum role: { user: "user", admin: "admin" }
   #enum role: [:user, :admin], tbm pode ser utilizado array
+
 end

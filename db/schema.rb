@@ -18,6 +18,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_18_191916) do
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "role_user", ["user", "admin"]
 
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -28,9 +29,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_18_191916) do
     t.string "phone_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+
     t.enum "role", default: "user", null: false, enum_type: "role_user"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
-
 end

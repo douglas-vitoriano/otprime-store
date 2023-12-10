@@ -1,0 +1,15 @@
+<% if user_signed_in? %>    
+    <li class="nav-link logout-button">
+        <%= form_tag(destroy_user_session_path, method: :delete) do %>
+            <%= submit_tag("Sair", class: "btn nav-link") %>
+        <% end %>
+  </li>     
+<% else %>
+    <li class="nav-link">              
+        <%= link_to "Cadastre-se", new_user_registration_path, class: "nav-link" %>
+    </li>
+    <li class="nav-link">
+        <%= link_to "Entrar", new_user_session_path, class: "nav-link" %>
+    </li>                    
+<% end %>
+

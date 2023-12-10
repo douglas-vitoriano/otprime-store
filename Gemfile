@@ -15,6 +15,11 @@ gem "sprockets-rails"
 
 gem "bootstrap"
 
+
+gem "bootstrap-icons-helper"
+
+gem "inputmask-rails"
+
 gem "sassc-rails", "2.1.2"
 
 gem "sass-rails", "~> 6.0"
@@ -97,3 +102,5 @@ group :test do
   gem "simplecov"
   gem "vcr"
 end
+
+gem "trestle", "~> 0.9.8"

@@ -1,6 +1,6 @@
 require_relative "boot"
-
 require "rails/all"
+require "faker"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -14,6 +14,10 @@ module OtprimeStore
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
+    config.i18n.default_locale = "pt-BR"
+    Faker::Config.locale = "pt-BR"
+
+    Faker::Config.locale = "pt-BR"
 
     Faker::Config.locale = "pt-BR"
 
@@ -24,5 +28,7 @@ module OtprimeStore
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.assets.precompile += %w( application.css )
+    config.assets.initialize_on_precompile = false
   end
 end
