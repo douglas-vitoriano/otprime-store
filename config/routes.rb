@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
 end
 
+
 =begin
  em controllers de MVC existe três tipos de actions(por deaful):
   - actions de coleção: index, new, create

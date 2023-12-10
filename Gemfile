@@ -14,6 +14,7 @@ gem "pg"
 gem "sprockets-rails"
 
 gem "bootstrap"
+
 gem "bootstrap-icons-helper"
 
 gem "inputmask-rails"
