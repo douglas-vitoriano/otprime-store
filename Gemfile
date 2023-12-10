@@ -15,10 +15,10 @@ gem "sprockets-rails"
 
 gem "bootstrap"
 
-
 gem "bootstrap-icons-helper"
 
 gem "inputmask-rails"
+
 
 gem "sassc-rails", "2.1.2"
 
