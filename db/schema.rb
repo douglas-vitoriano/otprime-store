@@ -10,54 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_30_231633) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_18_191916) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "addresses", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "street", null: false
-    t.string "neighborhood", null: false
-    t.string "number", null: false
-    t.string "zipcode", null: false
-    t.string "city", null: false
-    t.string "state", null: false
-    t.boolean "main", default: false, null: false
-    t.decimal "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["id"], name: "index_addresses_on_id", unique: true
-    t.index ["user_id"], name: "addresses_user"
-  end
+  # Custom types defined in this database.
+  # Note that some types may not work with other database engines. Be careful if changing database.
+  create_enum "role_user", ["user", "admin"]
 
-  create_table "categories", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "position", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["id"], name: "index_categories_on_id", unique: true
-    t.index ["name"], name: "categories_name"
-  end
-
-  create_table "products", force: :cascade do |t|
-    t.string "name", null: false
-    t.text "description", null: false
-    t.decimal "price", null: false
-    t.decimal "category_id", null: false
-    t.boolean "publish", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "products_category"
-    t.index ["id"], name: "index_products_on_id", unique: true
-  end
-
-  create_table "user_lists", force: :cascade do |t|
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_user_lists_on_user_id"
-
-  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -71,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_30_231633) do
     t.datetime "updated_at", null: false
 
     t.enum "role", default: "user", null: false, enum_type: "role_user"
-
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 end
