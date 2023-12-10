@@ -1,24 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Bem-vindo ao Otprime Store</title>
+    <title>Otprime Store</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="icon" href="<%= asset_path("image.png") %>" type="image/x-icon">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-
-    <%= javascript_importmap_tags %>
-
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-  </head>
-  <body>        
+  <body>
+    <!-- Navigation-->
     <%= render "layouts/store/nav" %>
-    <%= yield :head %>
+    <%= yield %>
     <%= render "layouts/store/footer" %>
   </body>
 </html>
