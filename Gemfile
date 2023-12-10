@@ -13,11 +13,17 @@ gem "pg"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
-gem "bootstrap"
+gem "bootstrap", "~> 5.1.3"
+gem "bootstrap-icons"
+gem "bootstrap-icons-helper"
+
+gem "inputmask-rails"
 
 gem "sassc-rails", "2.1.2"
 
 gem "sass-rails", "~> 6.0"
+
+gem "image_processing", ">= 1.2"
 
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3', '~> 1.4'
@@ -97,3 +103,7 @@ group :test do
   gem "simplecov"
   gem "vcr"
 end
+
+gem "trestle", "~> 0.9.8"
+
+gem "pundit", "~> 2.3"

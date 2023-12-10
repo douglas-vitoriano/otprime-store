@@ -1,0 +1,82 @@
+<header class="bg-dark py-1">
+  <div class="container px-5 px-lg-5 my-5">
+    <div class="text-center text-white">
+      <h1 class="display-8 fw-bolder">Sua loja virtual preferida</h1>
+      <p class="lead fw-normal text-white-50 mb-0">Otprime, mexendo com sua cabeça</p>
+    </div>
+  </div>
+</header>
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <div class="card">
+          <%= render "settings/menu" %>
+        </div>
+      </div>
+      <div class="col-9">
+        <div class="card">
+          <div class="card-body">
+            <%= render "layouts/shared/flash" if flash.present? %>
+            <h2>Detalhes do Endereço</h2>   
+            <%= simple_form_for @address, url: address_path(@address), method: :patch, data: { turbo: false } do |f| %>
+                <div class="form-inputs">
+                <div class="row">
+                  <div class="col">
+                    <div class="form-control" readonly>
+                      <strong>Nome:</strong> <%= @address.name %>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-control" readonly>
+                      <strong>Rua:</strong> <%= @address.street %>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-control" readonly>
+                      <strong>Número:</strong> <%= @address.number %>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-control" readonly>
+                      <strong>Bairro:</strong> <%= @address.neighborhood %>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-control" readonly>
+                      <strong>Complemento:</strong> <%= @address.address_detail %>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="form-control" readonly>
+                      <strong>CEP:</strong> <%= @address.zipcode %>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-control" readonly>
+                      <strong>Cidade:</strong> <%= @address.city %>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-control" readonly>
+                      <strong>Estado:</strong> <%= @address.state %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <%= link_to "Voltar", addresses_path, class: "btn btn-outline-secondary" %>                   
+                <%= button_to "Excluir", address_path(@address), method: :delete, data: { confirm: "Tem certeza que deseja excluir este endereço?" }, class: "btn btn-outline-danger" %>
+              </div>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

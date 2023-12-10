@@ -1,0 +1,69 @@
+<header class="bg-dark py-1">
+  <div class="container px-5 px-lg-5 my-5">
+    <div class="text-center text-white">
+      <h1 class="display-8 fw-bolder">Sua loja virtual preferida</h1>
+      <p class="lead fw-normal text-white-50 mb-0">Otprime, mexendo com sua cabeça</p>
+    </div>
+  </div>
+</header>
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <div class="card">
+          <%= render "settings/menu" %>
+        </div>
+      </div>
+      <div class="col-9">
+        <div class="card">
+          <div class="card-body">
+            <%= render "layouts/shared/flash" if flash.present? %>
+            <h2>Novo endereço</h2>
+            <%= simple_form_for @address, data: { turbo: false } do |f| %>
+              <%= f.error_notification %>
+              <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+              <div class="form-inputs">
+                <div class="row">
+                  <div class="col">
+                    <%= f.input :name, label: "Nome" %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <%= f.input :street, label: "Rua" %>
+                  </div>
+                  <div class="col">
+                    <%= f.input :number, label: "Número" %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <%= f.input :neighborhood, label: "Bairro" %>
+                  </div>
+                  <div class="col">
+                    <%= f.input :address_detail, label: "Complemento" %>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <%= f.input :zipcode, label: "CEP" %>
+                  </div>
+                  <div class="col">
+                    <%= f.input :city, label: "Cidade" %>
+                  </div>
+                  <div class="col">
+                    <%= f.input :state, label: "Estado" %>
+                  </div>
+                </div>
+              </div>
+              <div class="form-actions mt-2">
+                <%= f.button :submit, "Salvar", class: "btn btn-primary" %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
