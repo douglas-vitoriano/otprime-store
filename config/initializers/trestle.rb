@@ -3,27 +3,24 @@ Trestle.configure do |config|
   #
   # Set the page title shown in the main header within the admin.
   #
-  config.site_title = "Otprime Store"
+  config.site_title = "Otprime Admin"
+
 
   # Specify a custom image to be used in place of the site title for mobile and
   # expanded/desktop navigation. These images should be placed within your
-  # asset paths, e.g. app/assets/images.
-  #
-  # config.site_logo = "logo.png"
+  # asset paths, e.g. app/assets/images. 
+  # config.site_logo = "prime.png"
 
   # Specify a custom image to be used for the collapsed/tablet navigation.
   #
-  # config.site_logo_small = "logo-small.png"
+  config.site_logo_small = "image.png"
 
   # Specify a favicon to be used within the admin.
   #
-  # config.favicon = "favicon.ico"
-
+  config.favicon = "image.png"
   # Set the text shown in the page footer within the admin.
   # Defaults to 'Powered by Trestle'.
-  #
-  # config.footer = "Powered by Trestle"
-
+  config.footer = "Powered by Otprime Store"
   # Sets the default precision for timestamps (either :minutes or :seconds).
   # Defaults to :minutes.
   #

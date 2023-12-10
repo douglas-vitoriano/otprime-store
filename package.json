@@ -18,6 +18,9 @@
     "build:css": "sass app/assets/stylesheets/application.scss app/assets/builds/application.css",
     "build:css:devise": "sass app/assets/stylesheets/devise.scss app/assets/builds/devise.css",
     "build:css:admin": "sass app/assets/stylesheets/admin.scss app/assets/builds/admin.css",
+
+    "build:js": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds --public-path=/assets --external:controllers --external:@hotwired/stimulus-loading --loader:.js=file"
+
   },
   "devDependencies": {
     "esbuild": "^0.19.5"
