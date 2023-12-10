@@ -4,4 +4,5 @@ import { application } from './application'
 
 export function startStimulusApp() {
   application.start()
+
 }

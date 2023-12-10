@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users
+
+
   root to: "home#index"
+
+  namespace :admin do
+    root to: "home#index"
+    resources :admins
+  end
 end
+
+
 
 =begin
  em controllers de MVC existe três tipos de actions(por deaful):
