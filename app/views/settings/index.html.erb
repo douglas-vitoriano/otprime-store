@@ -1,0 +1,37 @@
+<header class="bg-dark py-1">
+  <div class="container px-5 px-lg-5 my-5">
+    <div class="text-center text-white">
+      <h1 class="display-8 fw-bolder">Sua loja virtual preferida</h1>
+      <p class="lead fw-normal text-white-50 mb-0">Otprime, mexendo com sua cabeça</p>
+    </div>
+  </div>
+</header>
+<section class = "py-5">
+  <div class = "container ">
+    <div class="row">
+      <div class="col-3">
+        <div class="card">          
+         <%= render "menu" %>
+        </div>
+      </div> 
+      <div class="col-9">
+        <div class="card">    
+          <div class="card-body">    
+              <%= render "layouts/shared/flash" if flash.present? %>  
+            <h2> <%= current_user.name %></h2>            
+            <%= image_tag avatar_url(current_user), width: 120, height: 120, class: "mb-4 rounded-circle" %>
+            <%= simple_form_for current_user, url: update_user_settings_path do |f| %>
+              <%= f.input :avatar, label: false, hint: "Escolha uma imagem para seu perfil", input_html: { class: "input_image_full" } %>
+              <%= f.input :name, label: "Nome" %>
+              <%= f.input :email, label: "E-mail", readonly: true %>              
+              <%= f.input :phone, label: "Telefone", input_html: { class: "mask-phone" }, placeholder: "Telefone" %>                
+              <%= f.button :submit, "Atualizar", class: "btn btn-outline-primary mt-4" %>
+            <% end %>
+          </div>
+          
+        </div>
+      </div>    
+    </div>
+  </div>    
+</section>
+

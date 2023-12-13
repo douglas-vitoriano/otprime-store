@@ -16,12 +16,7 @@ module OtprimeStore
     config.load_defaults 7.0
     config.i18n.default_locale = "pt-BR"
     Faker::Config.locale = "pt-BR"
-
-    Faker::Config.locale = "pt-BR"
-
-    Faker::Config.locale = "pt-BR"
-
-    Faker::Config.locale = "pt-BR"
+    config.action_controller.default_url_options = { host: "localhost", port: 3000 }
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -31,6 +26,7 @@ module OtprimeStore
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
     config.assets.precompile += %w( application.css )
+    config.autoload_paths += %W(#{config.root}/app/decorators)
     config.assets.initialize_on_precompile = false
   end
 end

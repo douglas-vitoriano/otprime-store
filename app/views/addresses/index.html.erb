@@ -1,0 +1,56 @@
+<header class="bg-dark py-1">
+  <div class="container px-5 px-lg-5 my-5">
+    <div class="text-center text-white">
+      <h1 class="display-8 fw-bolder">Sua loja virtual preferida</h1>
+      <p class="lead fw-normal text-white-50 mb-0">Otprime, mexendo com sua cabeça</p>
+    </div>
+  </div>
+</header>
+<section class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <div class="card">
+          <%= render "settings/menu" %>
+        </div>
+      </div>
+      <div class="col-9">
+        <div class="card">
+          <div class="card-body">
+            <%= render "layouts/shared/flash" if flash.present? %>
+            <h2>Meus endereços</h2>
+            <% if @addresses.any? %>
+              <table class="table">
+                <thead>
+                <tr>
+                  <th scope="col">Nome</th>
+                  <th scope="col">Rua</th>
+                  <th scope="col">Bairro</th>
+                  <th scope="col">Número</th>
+                  <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @addresses.each do |address| %>
+                  <tr>
+                    <td><%= address.name %></td>
+                    <td><%= address.street %></td>
+                    <td><%= address.neighborhood %></td>
+                    <td><%= address.number %></td>
+                    <td>
+                      <%= link_to "Detalhes", address_path(address), class: "btn btn-outline-secondary" %>                      
+                    </td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            <% else %>
+              <span style="font-size: smaller;">Nenhum endereço cadastrado.</span>
+            <% end %>
+            <%= link_to "Novo endereço", new_address_path, class: "btn btn-outline-primary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
