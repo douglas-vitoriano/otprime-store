@@ -38,7 +38,7 @@
                     <td><%= address.neighborhood %></td>
                     <td><%= address.number %></td>
                     <td>
-                      <%= link_to "Detalhes", address_path(address), class: "btn btn-secondary" %>                      
+                      <%= link_to "Detalhes", address_path(address), class: "btn btn-outline-secondary" %>                      
                     </td>
                   </tr>
                 <% end %>
@@ -47,7 +47,7 @@
             <% else %>
               <span style="font-size: smaller;">Nenhum endereço cadastrado.</span>
             <% end %>
-            <%= link_to "Novo endereço", new_address_path, class: "btn btn-primary" %>
+            <%= link_to "Novo endereço", new_address_path, class: "btn btn-outline-primary" %>
           </div>
         </div>
       </div>

@@ -11,6 +11,17 @@ Rails.application.routes.draw do
   end
 
   resources :addresses
+  resources :carts, only: [:show] do
+    resources :orders, only: [:new, :create, :show]
+    member do
+      post "add_to_cart", to: "carts#add", as: "add_to_cart"
+      post "update_cart", to: "carts#update_item", as: "update_cart"
+      post "remove_from_cart", to: "carts#remove", as: "remove_cart_item"
+    end
+    collection do
+      post :create
+    end
+  end
 
   namespace :admin do
     root to: "dashboard#index"

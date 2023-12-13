@@ -1,0 +1,28 @@
+<% if @addresses.present? && @addresses.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Rua</th>
+        <th scope="col">Bairro</th>
+        <th scope="col">Número</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @addresses.each do |address| %>
+        <tr>
+          <td><%= address.name %></td>
+          <td><%= address.street %></td>
+          <td><%= address.neighborhood %></td>
+          <td><%= address.number %></td>
+          <td>
+            <%= link_to "Detalhes", address_path(address), class: "btn btn-secondary" %>                      
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <span style="font-size: smaller;">Nenhum endereço cadastrado.</span>  
+<% end %>

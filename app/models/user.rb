@@ -5,8 +5,8 @@ class User < ApplicationRecord
   validates :name, :phone, presence: true
 
   has_one_attached :avatar
-
   has_many :addresses, dependent: :destroy
+  has_one :cart
 
   enum role: { user: "user", admin: "admin" }
 end

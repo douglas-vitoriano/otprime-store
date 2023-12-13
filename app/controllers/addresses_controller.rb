@@ -1,6 +1,12 @@
 class AddressesController < ApplicationController
   def index
     @addresses = current_user.addresses
+    @addresses = Address.all
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
   end
 
   def new

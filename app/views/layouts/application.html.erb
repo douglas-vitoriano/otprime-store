@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <title>Otprime Store</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,12 +9,29 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-  </head>
 
-  <body>
-    <!-- Navigation-->
-    <%= render "layouts/store/nav" %>
-    <%= yield %>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      main {
+        flex: 1;
+      }
+
+      footer {
+        flex-shrink: 0;
+      }
+    </style>
+  </head>
+  <body>  
+    <%= render "layouts/store/nav" %>  
+    <main>
+      <%= yield %>
+    </main>  
     <%= render "layouts/store/footer" %>
   </body>
 </html>

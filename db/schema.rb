@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_02_001507) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_11_001720) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
   # Custom types defined in this database.
   # Note that some types may not work with other database engines. Be careful if changing database.
   create_enum "role_user", ["user", "admin"]
@@ -61,6 +62,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_02_001507) do
     t.index ["user_id"], name: "addresses_user"
   end
 
+  create_table "carts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_carts_on_user_id"
+  end
+
   create_table "categories", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.integer "position", default: 0, null: false
@@ -68,6 +76,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_02_001507) do
     t.datetime "updated_at", null: false
     t.index ["id"], name: "index_categories_on_id", unique: true
     t.index ["name"], name: "categories_name"
+  end
+
+  create_table "orderables", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "product_id"
+    t.uuid "cart_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_orderables_on_cart_id"
+  end
+
+  create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "cart_id", null: false
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_orders_on_cart_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -82,6 +109,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_02_001507) do
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["id"], name: "index_products_on_id", unique: true
+  end
+
+  create_table "user_admins", force: :cascade do |t|
+    t.string "nome"
+    t.string "email"
+    t.string "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -101,5 +136,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_02_001507) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "carts", "users"
+  add_foreign_key "orderables", "carts"
+  add_foreign_key "orders", "carts"
+  add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
 end

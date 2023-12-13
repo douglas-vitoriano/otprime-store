@@ -4,7 +4,8 @@ class Product < ApplicationRecord
     attachable.variant :thumb, resize_to_limit: [100, 100]
     attachable.variant :big_thumb, resize_to_limit: [600, 700]
   end
-
+  has_many :orderables
+  has_many :carts, through: :orderables
   belongs_to :category
   before_destroy :purge_attached
 

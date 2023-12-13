@@ -11,7 +11,7 @@
                     --->
                     <%= render "layouts/store/user_signed" %>
                 </ul>       
-                <form class="d-flex">
+                <form class="d-flex" action="<%= cart_path(id: :product) %>" method: :post>
                     <button class="btn btn-outline-dark" type="submit">
                         <i class="bi-cart-fill me-1"></i>
                         Carrinho
