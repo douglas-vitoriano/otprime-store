@@ -1,6 +1,14 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
+
+  def index
+    @orders = current_user.orders
+  end
+
   def new
     @order = Order.new
+    @products = Product.all
+    @user = current_user
   end
 
   def show
@@ -9,6 +17,13 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
+
+    if some_condition
+      @order.payment_method = "credit_card"
+    else
+      @order.payment_method = "paypal"
+    end
+
     if @order.save
       redirect_to @order, notice: "Pedido criado com sucesso!"
     else
@@ -19,7 +34,6 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    # Adicione os parâmetros necessários para criar um pedido, por exemplo:
-    # params.require(:order).permit(:nome, :email, ...)
+    params.require(:order).permit(:payment_method, other_allowed_params)
   end
 end

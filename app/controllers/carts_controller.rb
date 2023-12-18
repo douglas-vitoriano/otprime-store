@@ -1,8 +1,19 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: [:show, :add, :remove]
+  before_action :set_cart, only: [:show, :add, :remove, :update_item]
 
   def show
-    @address ||= Address.new
+    @cart = Cart.find(params[:id])
+    @orders = @cart.orders.includes(:product)
+  end
+
+  def create
+    @cart = Cart.new(cart_params)
+
+    if @cart.save
+      redirect_to @cart
+    else
+      render :new
+    end
   end
 
   def add
@@ -10,11 +21,13 @@ class CartsController < ApplicationController
     quantity = params[:quantity].to_i
     @cart ||= Cart.find_or_create_by(user: current_user)
 
-    if quantity.positive?
-      current_orderable = @cart.orderables.find_or_initialize_by(product_id: @product&.id)
-      current_orderable.update(quantity: quantity)
-    else
-      @cart.orderables.find_by(product_id: @product&.id)&.destroy
+    if quantity.positive? && @product
+      current_order = @cart.orders.find_or_initialize_by(product_id: @product.id)
+      current_order.user ||= current_user if current_user.present?
+      current_order.user_id ||= current_user&.id
+      current_order.update(quantity: quantity)
+    elsif @product
+      @cart.orders.find_by(product_id: @product.id)&.destroy
     end
 
     respond_to do |format|
@@ -24,26 +37,26 @@ class CartsController < ApplicationController
   end
 
   def update_item
-    @cart ||= Cart.find_by(id: params[:id])
     @product = Product.find_by(id: params[:product_id])
     quantity = params[:quantity].to_i
 
-    if quantity.positive?
-      current_orderable = @cart.orderables.find_or_initialize_by(product_id: @product&.id)
-      current_orderable.update(quantity: quantity)
-    else
-      @cart.orderables.find_by(product_id: @product&.id)&.destroy
+    if quantity.positive? && @product
+      current_order = @cart.orders.find_or_initialize_by(product_id: @product.id)
+      current_order.update(quantity: quantity)
+    elsif @product
+      @cart.orders.find_by(product_id: @product.id)&.destroy
     end
 
-    # respond_to do |format|
-    #   format.turbo_stream { update_cart_stream }
-    # end
+    respond_to do |format|
+      format.turbo_stream { update_cart_stream }
+    end
   end
 
   def remove
-    Orderable.find_by(id: params[:id])&.destroy
+    @cart.orders.find_by(id: params[:id])&.destroy
 
     respond_to do |format|
+      format.html { redirect_to cart_path(@cart), notice: "Item removido do carrinho com sucesso!" }
       format.turbo_stream { update_cart_stream }
     end
   end
@@ -59,5 +72,9 @@ class CartsController < ApplicationController
       turbo_stream.replace("cart", partial: "cart/cart", locals: { cart: @cart }),
       turbo_stream.replace(@product),
     ]
+  end
+
+  def cart_params
+    params.require(:cart).permit(:user_id)
   end
 end

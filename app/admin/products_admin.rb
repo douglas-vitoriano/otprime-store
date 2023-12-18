@@ -54,6 +54,7 @@ Trestle.resource(:products) do
     end
 
     def show
+      @product = Product.find(params[:id])
       @products = Product.where(publish: true)
 
       begin

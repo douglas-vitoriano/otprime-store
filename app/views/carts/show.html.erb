@@ -2,8 +2,8 @@
   <h1>Seu carrinho</h1>
   <% if @cart.present? %>
     <div class="row">
-      <% @cart.orderables.each do |orderable| %>
-        <% product = orderable.product %>
+      <% @cart.orders.each do |orders| %>
+        <% product = orders.product %>
         <div class="col-md-12 mt-5">
           <div class="card" style="width: 100%;">
             <div class="row">
@@ -21,15 +21,15 @@
                       <% if product.present? %>
                         <h5 class="card-title"><%= product.name %></h5>
                         <p class="card-text"><%= product.description %></p>
-                        <p class="card-text">Quantidade: <%= orderable.quantity %></p>
+                        <p class="card-text">Quantidade: <%= orders.quantity %></p>
                         <% if product.price.present? %>
                           <p class="card-text">Preço unitário: R$<%= product.price %></p>
                         <% else %>
                           <p class="card-text text-danger">Preço não disponível</p>
                         <% end %>
                         <p class="card-text">
-                          <%= button_to "Atualizar", update_cart_cart_path(orderable_id: orderable.id), method: :post, remote: true, class: "btn btn-outline-secondary btn-sm", type: :submit %>
-                          <%= button_to "Remover", remove_cart_item_cart_path(orderable_id: orderable.id), method: :post, remote: true, class: "btn btn-outline-danger btn-sm", type: :submit %>
+                          <%= button_to "Atualizar", update_cart_cart_path(orders_id: orders.id), method: :post, remote: true, class: "btn btn-outline-secondary btn-sm", type: :submit %>
+                          <%= button_to "Remover", remove_cart_item_cart_path(orders_id: orders.id), method: :post, remote: true, class: "btn btn-outline-danger btn-sm", type: :submit %>
                         </p>
                       <% else %>
                         <p class="card-text text-danger">Produto não encontrado</p>
@@ -43,8 +43,7 @@
                   <div class="card-body">
                     <h5 class="card-title">Resumo do Pedido</h5>
                     <p class="card-text">Total: <%= @cart.total_price %></p>                       
-                    <% if @addresses.present? %>
-                      <!-- Se houver endereços -->
+                    <% if @addresses.present? %>                      
                       <% if @address.persisted? %>
                         <%= link_to "Endereço", address_path(@address), class: "btn btn-outline-secondary", data: { action: "click->carts#showAddresses" } %>
                       <% else %>              
@@ -53,14 +52,13 @@
                       <%= turbo_stream.replace "addresses" do %>
                         <%= render partial: "carts/address_table", locals: { addresses: @addresses } %>
                       <% end %>
-                    <% else %>
-                      <!-- Se não houver endereços -->
+                    <% else %>                      
                       <%= link_to "Novo endereço", new_address_path, class: "btn btn-outline-secondary" %>
                       <%= turbo_stream.replace "new_address_form" do %>
                         <%= render partial: "carts/new_address_form", locals: { address: @address } %>
                       <% end %>
                     <% end %>
-                    <%= link_to "Pagamento", new_cart_order_path(@cart), class: "btn btn-outline-primary" %>
+                    <%= link_to "Pagamento", new_order_path(@cart), class: "btn btn-outline-primary" %>
                   </div>
                 </div>
               </div>

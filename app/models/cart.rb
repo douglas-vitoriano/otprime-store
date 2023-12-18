@@ -1,10 +1,8 @@
 class Cart < ApplicationRecord
   belongs_to :user
-  has_many :orderables
-  has_many :products, through: :orderables
-  has_many :addresses
+  has_many :orders, dependent: :destroy
 
   def total_price
-    orderables.sum { |orderable| orderable.product&.price.to_f * orderable.quantity }
+    orders.order(:created_at).sum { |order| order.product&.price.to_f * order.quantity }
   end
 end

@@ -4,7 +4,6 @@ class CreateProducts < ActiveRecord::Migration[7.0]
       t.string :name, null: false
       t.text :description, null: false, default: ""
       t.decimal :price, precision: 8, scale: 2, null: false
-      t.references :category, null: false, type: :uuid, foreign_key: true
       t.boolean :publish, null: false, default: false
       t.boolean :promo, default: false
       t.decimal :promo_price, precision: 8, scale: 2, default: "0.0"
@@ -12,6 +11,8 @@ class CreateProducts < ActiveRecord::Migration[7.0]
       t.timestamps
 
       t.index :id, unique: true
+
+      t.references :category, null: false, type: :uuid, foreign_key: true
     end
   end
 end

@@ -2,10 +2,9 @@
   <div class="panel-body text-center">
     <h2 class="title">Confira aqui!</h2>
 
-    <div class="mx-auto" style="max-width: 800px;"> <!-- Adicionei esta div com a classe mx-auto -->
+    <div class="mx-auto" style="max-width: 800px;">
       <div class="row justify-content-center">
-        <div class="col-md-6">
-          <!-- Cartão 1 - Método de Pagamento com Cartão -->
+        <div class="col-md-6">          
           <div class="card mt-5" style="max-width: 400px;">
             <h5 class="card-header">Método de Pagamento com Cartão</h5>
             <div class="card-body">
@@ -14,45 +13,84 @@
                 <img src="https://designmodo.com/demo/checkout-panel/img/mastercard_logo.png" alt="Mastercard Logo"/>
               </div>
               <div class="form-check text-center">
-                <input type="radio" class="form-check-input" id="card" name="payment">
-                <label class="form-check-label" for="card">
-                  Pague R$<%= @cart.total_price %> utilizando seu cartão de crédito
-                </label>
+                <%= radio_button_tag "order[payment_method]", Order.payment_methods[:credit_card], false, id: "card" %>
+                <%= label_tag "card", "Pague R$#{number_to_currency(@cart.total_price)} utilizando seu cartão de crédito", class: "form-check-label" %>
               </div>
             </div>
-          </div>
-
-          <!-- Cartão 2 - Método de Pagamento com PayPal -->
+          </div>          
           <div class="card mt-5" style="max-width: 400px;">
             <h5 class="card-header">Método de Pagamento com PayPal</h5>
             <div class="card-body text-center">
               <img src="https://designmodo.com/demo/checkout-panel/img/paypal_logo.png" alt="PayPal Logo"/>
               <div class="form-check">
-                <input type="radio" class="form-check-input" id="paypal" name="payment">
-                <label class="form-check-label" for="paypal">
-                  Pague R$<%= @cart.total_price %> utilizando o PayPal
-                </label>
+                <%= radio_button_tag "order[payment_method]", Order.payment_methods[:paypal], false, id: "paypal" %>
+                <%= label_tag "paypal", "Pague R$#{number_to_currency(@cart.total_price)} utilizando o PayPal", class: "form-check-label" %>
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- Resumo do Pedido -->
+        </div>       
         <div class="col-md-6">
           <div class="card mt-5" style="max-width: 400px;">
             <div class="card-body text-center">
-            <h5 class="card-title">Resumo do Pedido</h5>
-            <% @cart.orderables.each do |orderable| %>
-              <p class="card-text">Total de Produtos: <%= orderable.quantity %></p>
+              <h5 class="card-title">Resumo do Pedido</h5>
+              <% total_produtos = 0 %>
+              <% @cart.orders.each do |orders| %>
+                <p class="card-text">Total de Produtos: <%= orders.quantity %></p>
+                <% total_produtos += orders.quantity %>
+              <% end %>              
               <p class="card-text">Total: R$<%= @cart.total_price %></p>
-            <% end %>
-          </div>
-          <div class="panel-footer mt-4">
-            <%= button_to "Finalizar", order_path, method: :post, class: "btn btn-outline-primary", data: { disable_with: "Aguarde..." } %>
-          </div>
+            </div>
+            <div class="panel-footer mt-4">
+               <%= button_to "Finalizar Pedido", finalize_order_cart_path(@cart), method: :post, class: "btn btn-outline-primary btn-open-modal", data: { disable_with: "Aguarde..." } %>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<div class="modal fade" id="processingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Parabéns pela compra</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">        
+        <p>Seu pedido foi realizado com sucesso!</p>
+        <p>Olá, <%= @user.name %>. Enviaremos mais informações via e-mail.</p>            
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" id="btnConcluido" data-dismiss="modal">Concluir</button>
+      </div> 
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+  var openModalButtons = document.querySelectorAll('.btn-open-modal');
+
+  openModalButtons.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+      event.preventDefault();         
+      setTimeout(function() {
+        $('#processingModal').modal('show');
+      }, 100);
+    });
+  });
+
+  document.getElementById('btnConcluido').addEventListener('click', function() {
+    window.location.href = "<%= root_path %>";
+  });
+});
+
+</script>

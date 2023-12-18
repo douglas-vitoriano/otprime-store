@@ -1,42 +1,44 @@
 <%= link_to "Novo endereço", new_address_path, class: "btn btn-primary" %>
-  <%= simple_form_for @address, data: { turbo: false } do |f| %>
-    <%= f.error_notification %>
-    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-    <div class="form-inputs">
-      <div class="row">
-        <div class="col">
-          <%= f.input :name, label: "Nome" %>
+  <% if @address.present? %>
+    <%= simple_form_for @address, data: { turbo: false } do |f| %>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+      <div class="form-inputs">
+        <div class="row">
+          <div class="col">
+            <%= f.input :name, label: "Nome" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <%= f.input :street, label: "Rua" %>
+          </div>
+          <div class="col">
+            <%= f.input :number, label: "Número" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <%= f.input :neighborhood, label: "Bairro" %>
+          </div>
+          <div class="col">
+            <%= f.input :address_detail, label: "Complemento" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <%= f.input :zipcode, label: "CEP" %>
+          </div>
+          <div class="col">
+            <%= f.input :city, label: "Cidade" %>
+          </div>
+          <div class="col">
+            <%= f.input :state, label: "Estado" %>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col">
-          <%= f.input :street, label: "Rua" %>
-        </div>
-        <div class="col">
-          <%= f.input :number, label: "Número" %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <%= f.input :neighborhood, label: "Bairro" %>
-        </div>
-        <div class="col">
-          <%= f.input :address_detail, label: "Complemento" %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <%= f.input :zipcode, label: "CEP" %>
-        </div>
-        <div class="col">
-          <%= f.input :city, label: "Cidade" %>
-        </div>
-        <div class="col">
-          <%= f.input :state, label: "Estado" %>
-        </div>
-      </div>
-    </div>
-    <div class="form-actions mt-2">
-      <%= f.button :submit, "Salvar", class: "btn btn-primary" %>
-    </div> 
+      <div class="form-actions mt-2">
+        <%= f.button :submit, "Salvar", class: "btn btn-primary" %>
+      </div> 
+  <% end %>
 <% end %>

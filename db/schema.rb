@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_11_001720) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_13_201259) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -64,8 +64,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_11_001720) do
 
   create_table "carts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id"
+    t.uuid "address_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_carts_on_address_id"
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
@@ -78,21 +80,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_11_001720) do
     t.index ["name"], name: "categories_name"
   end
 
-  create_table "orderables", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "product_id"
-    t.uuid "cart_id", null: false
-    t.integer "quantity"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["cart_id"], name: "index_orderables_on_cart_id"
-  end
-
   create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "user_id", null: false
-    t.uuid "cart_id", null: false
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "payment_method", default: "0"
+    t.integer "quantity", default: 1
+    t.uuid "cart_id", null: false
+    t.uuid "user_id", null: false
+    t.uuid "product_id"
     t.index ["cart_id"], name: "index_orders_on_cart_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -101,12 +97,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_11_001720) do
     t.string "name", null: false
     t.text "description", default: "", null: false
     t.decimal "price", precision: 8, scale: 2, null: false
-    t.uuid "category_id", null: false
     t.boolean "publish", default: false, null: false
     t.boolean "promo", default: false
     t.decimal "promo_price", precision: 8, scale: 2, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "category_id", null: false
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["id"], name: "index_products_on_id", unique: true
   end
@@ -136,8 +132,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_11_001720) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "carts", "addresses"
   add_foreign_key "carts", "users"
-  add_foreign_key "orderables", "carts"
   add_foreign_key "orders", "carts"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"

@@ -2,5 +2,5 @@
   <h2>Detalhes do Pedido</h2>
   <p>Valor a pagar: R$<%= @order.total_price %></p>
   <p>Forma de pagamento: <%= @order.payment_method %></p>
-  <p>Número do pedido: <%= @order.number %></p>
+  <p>Número do pedido: <%= order.id.to_s.first(8) %></p>
 </div>
