@@ -71,7 +71,7 @@ Trestle.resource(:products) do
       @product.image.attach(params[:product][:image])
 
       if @product.save
-        redirect_to products_admin_url(@product), notice: "Produto criado com sucesso."
+        redirect_to products_admin_path(@product), notice: "Produto criado com sucesso."
       else
         render :new
       end

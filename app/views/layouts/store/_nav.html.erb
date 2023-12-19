@@ -11,10 +11,8 @@
                     --->
                     <%= render "layouts/store/user_signed" %>
                 </ul>       
-               <%= link_to "Carrinho", { controller: :carts, action: :show }, method: :get, class: "btn btn-outline-dark" do %>
-                    <i class="bi-cart-fill me-1"></i>
-                        Carrinho
-                    <span class="badge bg-dark text-white ms-1 rounded-pill"></span>
+                <% if current_user && current_user.cart.present? %>
+                    <%= link_to "Carrinho", show_items_cart_path(current_user.cart.id), class: "btn btn-outline-dark" %>
                 <% end %>
             </div>
         </div>

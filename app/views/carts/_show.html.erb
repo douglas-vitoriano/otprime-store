@@ -27,8 +27,7 @@
                         <% else %>
                           <p class="card-text text-danger">Preço não disponível</p>
                         <% end %>
-                        <p class="card-text">
-                          <%= button_to "Atualizar", update_cart_cart_path(orders_id: orders.id), method: :post, remote: true, class: "btn btn-outline-secondary btn-sm", type: :submit %>
+                        <p class="card-text">                          
                           <%= button_to "Remover", remove_cart_item_cart_path(orders_id: orders.id), method: :post, remote: true, class: "btn btn-outline-danger btn-sm", type: :submit %>
                         </p>
                       <% else %>

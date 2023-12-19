@@ -1,5 +1,6 @@
 class CartsController < ApplicationController
   before_action :set_cart, only: [:show, :add, :remove, :update_item]
+  before_action :authenticate_user!
 
   def show
     @cart = Cart.find(params[:id])
@@ -31,7 +32,7 @@ class CartsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to cart_path(@cart) }
+      format.html { redirect_to show_items_cart_path(@cart) }
       format.turbo_stream { update_cart_stream }
     end
   end
@@ -53,11 +54,19 @@ class CartsController < ApplicationController
   end
 
   def remove
-    @cart.orders.find_by(id: params[:id])&.destroy
+    @cart = Cart.find(params[:id])
+    orders = @cart.orders
+    order_to_remove = orders.find(params[:orders_id])
+
+    order_to_remove.destroy
 
     respond_to do |format|
-      format.html { redirect_to cart_path(@cart), notice: "Item removido do carrinho com sucesso!" }
-      format.turbo_stream { update_cart_stream }
+      if orders.count >= 1
+        format.html { redirect_to show_items_cart_path(@cart), notice: "Item removido do carrinho." }
+      else
+        format.html { redirect_to root_path, notice: "Item removido do carrinho. Carrinho vazio." }
+      end
+      format.turbo_stream { remove_item_stream(order_to_remove) }
     end
   end
 
@@ -76,5 +85,9 @@ class CartsController < ApplicationController
 
   def cart_params
     params.require(:cart).permit(:user_id)
+  end
+
+  def remove_item_stream(order)
+    turbo_stream.remove dom_id(order)
   end
 end

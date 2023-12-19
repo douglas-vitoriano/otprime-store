@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       post "update_cart", to: "carts#update_item", as: "update_cart"
       post "remove_from_cart", to: "carts#remove", as: "remove_cart_item"
       post "finalize_order", to: "orders#finalize", as: "finalize_order"
+      get "show_items", to: "carts#show_items", as: "show_items"
     end
     collection do
       post :create

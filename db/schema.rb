@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_13_201259) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_19_133322) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,13 +84,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_13_201259) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "payment_method", default: "0"
+    t.string "payment_methods", default: "0"
     t.integer "quantity", default: 1
     t.uuid "cart_id", null: false
     t.uuid "user_id", null: false
     t.uuid "product_id"
+    t.uuid "status_id"
+    t.uuid "payment_method_id"
     t.index ["cart_id"], name: "index_orders_on_cart_id"
+    t.index ["payment_method_id"], name: "index_orders_on_payment_method_id"
+    t.index ["status_id"], name: "index_orders_on_status_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "payment_methods", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -105,6 +115,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_13_201259) do
     t.uuid "category_id", null: false
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["id"], name: "index_products_on_id", unique: true
+  end
+
+  create_table "statuses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "user_admins", force: :cascade do |t|
@@ -135,6 +151,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_13_201259) do
   add_foreign_key "carts", "addresses"
   add_foreign_key "carts", "users"
   add_foreign_key "orders", "carts"
+  add_foreign_key "orders", "payment_methods"
+  add_foreign_key "orders", "statuses"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "categories"
 end
