@@ -5,7 +5,9 @@ Trestle.resource(:orders) do
   end
 
   table do
-    column :id
+    column :id, link: true, header: "ID" do |order|
+      order.id.to_s.first(8)
+    end
     column :user
     column :product
     column :total_price
