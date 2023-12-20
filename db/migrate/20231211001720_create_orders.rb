@@ -4,11 +4,12 @@ class CreateOrders < ActiveRecord::Migration[7.0]
       t.string "status"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
-      t.string "payment_methods", default: 0
+      t.string "payment_method", default: "0"
       t.integer "quantity", default: 1
 
       t.references :cart, null: false, type: :uuid, foreign_key: true
       t.references :user, null: false, type: :uuid, foreign_key: true
+      t.references :product, null: false, type: :uuid, foreign_key: true
     end
   end
 end

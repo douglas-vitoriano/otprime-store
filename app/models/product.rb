@@ -1,13 +1,14 @@
 class Product < ApplicationRecord
-  scope :published, -> { where(publish: true) }
+  belongs_to :category
+  before_destroy :purge_attached
+  has_many :orders, dependent: :destroy
+  has_many :carts, through: :orders
   has_one_attached :image do |attachable|
     attachable.variant :thumb, resize_to_limit: [100, 100]
     attachable.variant :big_thumb, resize_to_limit: [600, 700]
   end
-  has_many :orders, dependent: :destroy
-  has_many :carts, through: :order
-  belongs_to :category
-  before_destroy :purge_attached
+
+  scope :published, -> { where(publish: true) }
 
   validates :name, :description, :price, presence: true
   validate :image_attached

@@ -29,23 +29,26 @@
             </div>
           </div>
           <!-- Product actions-->
-         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
             <div class="text-center">
-              <%= form_with(url: add_to_cart_cart_path(product), html: { class: "row g-3" }) do |f| %>
+              <%= form_with(model: @cart, url: carts_path, local: true, html: { method: "post" }) do |f| %>
                 <%= f.hidden_field :id, value: product.id %>
-                <div class="col-md-6">
-                  <%= f.label :quantity, "Quantidade:", class: "form-label" %>
+                <div class="row">
+                  <div class="col-md-6">
+                    <%= f.label :quantity, "Quantidade:", class: "form-label" %>
+                  </div>
+                  <div class="col-md-6">
+                    <%= f.number_field :quantity, value: 1, min: 1, class: "form-label text-center", style: "width: 50px;" %>
+                  </div>
                 </div>
-                <div class="col-md-6">
-                  <%= f.number_field :quantity, value: 1, min: 1, class: "form-label text-center", style: "width: 50px;" %>
+                <div class="col-12">
+                  <%= f.submit "Adicionar ao carrinho", class: "btn btn-outline-dark mt-auto" %>
                 </div>
-                <%= f.submit "Adicionar ao carrinho", class: "btn btn-outline-dark mt-auto" %>
-              <% end %>
+              <% end %>       
             </div>
           </div>
         </div>
-      <% end %>      
+      <% end %>
     </div>
   </div>
 </section>
-

@@ -6,19 +6,6 @@
       <div class="row justify-content-center">
         <div class="col-md-6">          
           <div class="card mt-5" style="max-width: 400px;">
-            <h5 class="card-header">Método de Pagamento com Cartão</h5>
-            <div class="card-body">
-              <div class="card-logos text-center">
-                <img src="https://designmodo.com/demo/checkout-panel/img/visa_logo.png" alt="Visa Logo"/>
-                <img src="https://designmodo.com/demo/checkout-panel/img/mastercard_logo.png" alt="Mastercard Logo"/>
-              </div>
-              <div class="form-check text-center">
-                <%= radio_button_tag "order[payment_method]", Order.payment_methods[:credit_card], false, id: "card" %>
-                <%= label_tag "card", "Pague R$#{number_to_currency(@cart.total_price)} utilizando seu cartão de crédito", class: "form-check-label" %>
-              </div>
-            </div>
-          </div>          
-          <div class="card mt-5" style="max-width: 400px;">
             <h5 class="card-header">Método de Pagamento com PayPal</h5>
             <div class="card-body text-center">
               <img src="https://designmodo.com/demo/checkout-panel/img/paypal_logo.png" alt="PayPal Logo"/>

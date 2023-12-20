@@ -18,12 +18,6 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
 
-    if some_condition
-      @order.payment_method = "credit_card"
-    else
-      @order.payment_method = "paypal"
-    end
-
     if @order.save
       redirect_to @order, notice: "Pedido criado com sucesso!"
     else
@@ -34,6 +28,6 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:payment_method, other_allowed_params)
+    params.require(:order).permit(:quantity)
   end
 end

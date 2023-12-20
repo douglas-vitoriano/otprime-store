@@ -11,8 +11,8 @@
         <blockquote class="blockquote mb-0">
           <p>Valor R$<%= order.cart.total_price %></p>
           <p>Quantidade: <%= order.quantity %></p>
-          <p>Status: <%= order.status.name %></p>
-          <p>Forma de pagamento: <%= order.payment_method.name %></p>
+          <p>Status: <%= order.status&.name || "Pedido Processado" %></p>
+          <p>Forma de pagamento: <%= order.payment_method&.name || "N/A" %></p>
           <br>
         </blockquote>
       </div>

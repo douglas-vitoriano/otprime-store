@@ -30,6 +30,7 @@
   <body>  
     <%= render "layouts/store/nav" %>  
     <main>
+      <%= turbo_stream_from "new" %>
       <%= yield %>
     </main>  
     <%= render "layouts/store/footer" %>
